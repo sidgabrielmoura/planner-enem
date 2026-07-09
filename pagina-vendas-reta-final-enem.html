@@ -1,896 +1,1292 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reta Final ENEM — Planner de Estudos até a Prova</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --paper:#F3F5FB;
-  --paper-deep:#E8ECF8;
-  --line:#D7DEF0;
-  --ink:#1B2340;
-  --ink-soft:#545C78;
-  --pink:#FF4F81;
-  --pink-deep:#E63A6B;
-  --yellow:#FFD93D;
-  --green:#4FBE7A;
-  --green-soft:#B7ECC8;
-  --purple:#8B7CF6;
-  --blue:#4F9DFF;
-  --white:#FFFFFF;
-  --shadow: 0 8px 24px rgba(27,35,64,0.10);
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reta Final ENEM — Planner de Estudos até a Prova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #F3F5FB;
+      --paper-deep: #E8ECF8;
+      --line: #D7DEF0;
+      --ink: #1B2340;
+      --ink-soft: #545C78;
+      --pink: #FF4F81;
+      --pink-deep: #E63A6B;
+      --yellow: #FFD93D;
+      --green: #4FBE7A;
+      --green-soft: #B7ECC8;
+      --purple: #8B7CF6;
+      --blue: #4F9DFF;
+      --white: #FFFFFF;
+      --shadow: 0 8px 24px rgba(27, 35, 64, 0.10);
+    }
 
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;overflow-x:hidden;width:100%;}
-body{
-  margin:0;
-  overflow-x:hidden;
-  width:100%;
-  background:var(--paper);
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px);
-  background-size: 100% 32px;
-  color:var(--ink);
-  font-family:'Inter',sans-serif;
-  font-size:16px;
-  line-height:1.55;
-  -webkit-font-smoothing:antialiased;
-}
-h1,h2,h3{
-  font-family:'Space Grotesk',sans-serif;
-  margin:0;
-  line-height:1.1;
-  letter-spacing:-0.01em;
-}
-p{margin:0;}
-.hand{font-family:'Caveat',cursive;}
-img,svg{display:block;max-width:100%;}
-a{color:inherit;}
-button{font-family:inherit;cursor:pointer;border:none;background:none;}
+    * {
+      box-sizing: border-box;
+    }
 
-.wrap{max-width:520px;margin:0 auto;padding:0 20px;}
-@media(min-width:900px){ .wrap{max-width:880px;} }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
 
-/* ---------- TAB STRIP ---------- */
-.tabstrip{
-  display:flex;
-  gap:6px;
-  padding:14px 20px 0;
-  max-width:520px;
-  margin:0 auto;
-}
-@media(min-width:900px){ .tabstrip{max-width:880px;} }
-.tab{
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:0.04em;
-  padding:6px 10px 8px;
-  border-radius:8px 8px 0 0;
-  color:var(--white);
-  opacity:0.55;
-  white-space:nowrap;
-}
-.tab.active{opacity:1;}
-.tab-ling{background:var(--pink);}
-.tab-hum{background:var(--purple);}
-.tab-nat{background:var(--blue);}
-.tab-mat{background:var(--green);}
-.tab-red{background:#D9A83B;}
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      width: 100%;
+      background: var(--paper);
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px);
+      background-size: 100% 32px;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* ---------- HERO ---------- */
-.hero{
-  padding:28px 0 40px;
-  text-align:center;
-}
-.hero-tag{
-  display:inline-block;
-  background:var(--white);
-  border:1.5px dashed var(--ink);
-  border-radius:999px;
-  padding:6px 16px;
-  font-size:12.5px;
-  font-weight:600;
-  color:var(--ink-soft);
-  margin-bottom:22px;
-  transform:rotate(-1.5deg);
-}
-.countdown-wrap{
-  position:relative;
-  display:inline-flex;
-  flex-direction:column;
-  align-items:center;
-  margin:0 auto 26px;
-}
-.countdown-note{
-  font-family:'Caveat',cursive;
-  font-size:22px;
-  font-weight:700;
-  color:var(--pink-deep);
-  transform:rotate(-3deg);
-  margin-bottom:-6px;
-}
-.countdown-circle{
-  position:relative;
-  width:220px;
-  height:220px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.countdown-circle svg{position:absolute;inset:0;width:100%;height:100%;}
-.countdown-days{
-  font-size:64px;
-  font-weight:700;
-  color:var(--ink);
-  line-height:1;
-}
-.countdown-days span{
-  display:block;
-  font-family:'Inter',sans-serif;
-  font-size:13px;
-  font-weight:600;
-  color:var(--ink-soft);
-  margin-top:4px;
-  letter-spacing:0.02em;
-}
-.countdown-sub{
-  display:flex;
-  gap:14px;
-  margin-top:14px;
-  font-size:13px;
-  color:var(--ink-soft);
-}
-.countdown-sub b{
-  display:block;
-  font-size:17px;
-  color:var(--ink);
-  font-family:'Space Grotesk',sans-serif;
-}
+    h1,
+    h2,
+    h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
 
-.hero h1{
-  font-size:30px;
-  margin-bottom:14px;
-  padding:0 6px;
-}
-.hero h1 mark{
-  background:var(--yellow);
-  background-image:linear-gradient(120deg, var(--yellow) 0%, var(--yellow) 100%);
-  padding:2px 6px;
-  border-radius:4px;
-  color:var(--ink);
-}
-.hero-sub{
-  font-size:16px;
-  color:var(--ink-soft);
-  max-width:380px;
-  margin:0 auto 26px;
-}
-.btn-primary{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  background:var(--pink);
-  color:var(--white);
-  font-weight:700;
-  font-size:16px;
-  padding:16px 28px;
-  border-radius:14px;
-  box-shadow:0 10px 0 var(--pink-deep);
-  transition:transform .12s ease;
-  text-decoration:none;
-}
-.btn-primary:active{transform:translateY(6px);box-shadow:0 4px 0 var(--pink-deep);}
-.hero-note{
-  font-size:12.5px;
-  color:var(--ink-soft);
-  margin-top:12px;
-}
+    p {
+      margin: 0;
+    }
 
-/* ---------- SECTION GENERIC ---------- */
-section{padding:44px 0;}
-.section-eyebrow{
-  font-family:'Caveat',cursive;
-  font-size:20px;
-  font-weight:700;
-  color:var(--pink-deep);
-  transform:rotate(-2deg);
-  display:inline-block;
-  margin-bottom:2px;
-}
-.section-title{
-  font-size:24px;
-  margin-bottom:10px;
-}
-.section-sub{
-  font-size:15px;
-  color:var(--ink-soft);
-  margin-bottom:28px;
-  max-width:420px;
-}
-.cut-line{
-  border:none;
-  border-top:2px dashed var(--line);
-  margin:0;
-  position:relative;
-}
-.reveal{
-  opacity:0;
-  transform:translateY(18px);
-  transition:opacity .5s ease, transform .5s ease;
-}
-.reveal.in{opacity:1;transform:translateY(0);}
-@media (prefers-reduced-motion: reduce){
-  .reveal{opacity:1!important;transform:none!important;transition:none!important;}
-}
+    .hand {
+      font-family: 'Caveat', cursive;
+    }
 
-/* ---------- QUIZ ---------- */
-.quiz-card{
-  background:var(--white);
-  border-radius:18px;
-  box-shadow:var(--shadow);
-  padding:26px 22px 24px;
-  position:relative;
-  transform:rotate(-0.6deg);
-}
-.quiz-pin{
-  position:absolute;
-  top:-10px;left:50%;
-  transform:translateX(-50%);
-  width:20px;height:20px;
-  border-radius:50%;
-  background:var(--pink);
-  box-shadow:0 3px 6px rgba(0,0,0,0.2);
-}
-.quiz-progress{
-  display:flex;
-  gap:6px;
-  justify-content:center;
-  margin-bottom:18px;
-}
-.quiz-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--line);
-}
-.quiz-dot.done{background:var(--green);}
-.quiz-dot.current{background:var(--pink);}
-.quiz-q{font-size:18px;font-weight:600;margin-bottom:18px;text-align:center;}
-.quiz-options{display:flex;flex-direction:column;gap:10px;}
-.quiz-opt{
-  border:2px solid var(--line);
-  border-radius:12px;
-  padding:14px 16px;
-  font-size:15px;
-  font-weight:600;
-  text-align:left;
-  color:var(--ink);
-  background:var(--paper);
-  transition:border-color .15s ease, background .15s ease;
-}
-.quiz-opt:active{background:var(--yellow);border-color:var(--yellow);}
-.quiz-step{display:none;}
-.quiz-step.active{display:block;animation:slidein .35s ease;}
-@keyframes slidein{
-  from{opacity:0;transform:translateX(24px);}
-  to{opacity:1;transform:translateX(0);}
-}
-.quiz-result{display:none;text-align:center;}
-.quiz-result.active{display:block;animation:slidein .4s ease;}
-.quiz-result-badge{
-  font-family:'Caveat',cursive;
-  font-size:22px;
-  color:var(--green);
-  font-weight:700;
-  margin-bottom:8px;
-}
-.quiz-result p{font-size:15.5px;color:var(--ink-soft);margin-bottom:20px;}
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
 
-/* ---------- PREVIEW CAROUSEL ---------- */
-.carousel{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  padding:4px 20px 14px;
-  margin:0 -20px;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-}
-.carousel::-webkit-scrollbar{display:none;width:0;height:0;}
-.preview-card{
-  scroll-snap-align:center;
-  flex:0 0 240px;
-  background:var(--white);
-  border-radius:14px;
-  box-shadow:var(--shadow);
-  padding:16px;
-  border-top:6px solid var(--pink);
-}
-.preview-card.c2{border-top-color:var(--purple);}
-.preview-card.c3{border-top-color:var(--blue);}
-.preview-card.c4{border-top-color:var(--green);}
-.preview-label{font-size:11px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;}
-.mini-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
-.mini-box{width:14px;height:14px;border:1.5px solid var(--ink);border-radius:3px;flex:0 0 auto;}
-.mini-line{height:8px;background:var(--paper-deep);border-radius:4px;flex:1;}
-.mini-bar{height:6px;border-radius:4px;background:var(--line);overflow:hidden;margin:10px 0;}
-.mini-bar i{display:block;height:100%;background:var(--pink);width:64%;}
+    a {
+      color: inherit;
+    }
 
-/* ---------- INCLUDED LIST ---------- */
-.incl-list{display:flex;flex-direction:column;gap:12px;}
-.incl-item{
-  display:flex;
-  align-items:flex-start;
-  gap:12px;
-  background:var(--white);
-  border-radius:12px;
-  padding:14px 16px;
-  box-shadow:var(--shadow);
-}
-.incl-check{
-  flex:0 0 auto;
-  width:22px;height:22px;
-  color:var(--green);
-}
-.incl-item b{font-size:15px;display:block;}
-.incl-item span{font-size:13.5px;color:var(--ink-soft);}
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
 
-/* ---------- TESTIMONIALS ---------- */
-.notes-wrap{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  padding:6px 20px 16px;
-  margin:0 -20px;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-  -webkit-overflow-scrolling:touch;
-}
-.notes-wrap::-webkit-scrollbar{display:none;width:0;height:0;}
-.note{
-  scroll-snap-align:center;
-  flex:0 0 250px;
-  background:var(--yellow);
-  border-radius:4px;
-  padding:20px 18px 24px;
-  box-shadow:0 6px 14px rgba(0,0,0,0.12);
-  font-family:'Caveat',cursive;
-  font-size:19px;
-  line-height:1.35;
-  color:#4a3c00;
-  position:relative;
-}
-.note.n2{background:var(--green-soft);color:#1c4a2e;}
-.note.n3{background:#FBD7E6;color:#5c1734;}
-.note-tape{
-  position:absolute;top:-10px;left:50%;
-  transform:translateX(-50%) rotate(-3deg);
-  width:60px;height:22px;
-  background:rgba(255,255,255,0.55);
-  border:1px solid rgba(255,255,255,0.7);
-}
-.note-name{
-  display:block;margin-top:14px;
-  font-family:'Inter',sans-serif;
-  font-size:12.5px;
-  font-weight:700;
-  opacity:0.75;
-}
-.note-flag{font-size:10.5px;font-family:'Inter',sans-serif;font-weight:700;opacity:.55;}
+    .wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-/* ---------- OFFER ---------- */
-.offer-card{
-  background:var(--ink);
-  border-radius:20px;
-  padding:30px 24px 28px;
-  color:var(--white);
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-.offer-ribbon{
-  position:absolute;top:16px;right:-34px;
-  background:var(--pink);
-  color:var(--white);
-  font-size:11px;
-  font-weight:700;
-  padding:5px 40px;
-  transform:rotate(35deg);
-}
-.offer-old{
-  font-size:16px;
-  color:#8891B0;
-  text-decoration:line-through;
-  margin-bottom:2px;
-}
-.offer-price{
-  font-size:52px;
-  font-weight:700;
-  font-family:'Space Grotesk',sans-serif;
-  margin-bottom:4px;
-}
-.offer-price sup{font-size:22px;top:-22px;position:relative;}
-.offer-cycle{font-size:13px;color:#AEB6D6;margin-bottom:22px;}
-.offer-list{
-  text-align:left;
-  display:flex;flex-direction:column;gap:9px;
-  margin-bottom:24px;
-  font-size:14px;
-}
-.offer-list div{display:flex;gap:8px;align-items:flex-start;}
-.offer-guarantee{
-  font-size:12.5px;
-  color:#AEB6D6;
-  margin-top:14px;
-}
+    @media(min-width:900px) {
+      .wrap {
+        max-width: 880px;
+      }
+    }
 
-/* ---------- FAQ ---------- */
-.faq-item{
-  border-bottom:2px dashed var(--line);
-  padding:16px 0;
-}
-.faq-q{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  font-weight:600;
-  font-size:15px;
-}
-.faq-icon{
-  flex:0 0 auto;
-  width:22px;height:22px;
-  border:2px solid var(--ink);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;
-  transition:transform .2s ease;
-}
-.faq-item.open .faq-icon{transform:rotate(45deg);}
-.faq-a{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height .25s ease;
-  font-size:14px;
-  color:var(--ink-soft);
-}
-.faq-item.open .faq-a{max-height:200px;padding-top:10px;}
+    /* ---------- TAB STRIP ---------- */
+    .tabstrip {
+      display: flex;
+      gap: 6px;
+      padding: 14px 20px 0;
+      max-width: 520px;
+      margin: 0 auto;
+    }
 
-/* ---------- FINAL CTA ---------- */
-.final-cta{
-  text-align:center;
-  padding:44px 0 100px;
-}
-.final-cta h2{font-size:24px;margin-bottom:12px;}
+    @media(min-width:900px) {
+      .tabstrip {
+        max-width: 880px;
+      }
+    }
 
-/* ---------- STICKY BOTTOM BAR ---------- */
-.sticky-bar{
-  position:fixed;
-  left:0;right:0;bottom:0;
-  background:var(--white);
-  border-top:1.5px solid var(--line);
-  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  transform:translateY(120%);
-  transition:transform .3s ease;
-  z-index:40;
-  box-shadow:0 -6px 20px rgba(27,35,64,0.12);
-}
-.sticky-bar.show{transform:translateY(0);}
-.sticky-price{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;}
-.sticky-price span{display:block;font-size:11px;font-weight:600;color:var(--ink-soft);font-family:'Inter',sans-serif;}
-.sticky-bar .btn-primary{padding:12px 20px;font-size:14.5px;box-shadow:0 6px 0 var(--pink-deep);white-space:nowrap;}
+    .tab {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 6px 10px 8px;
+      border-radius: 8px 8px 0 0;
+      color: var(--white);
+      opacity: 0.55;
+      white-space: nowrap;
+    }
 
-footer{
-  text-align:center;
-  padding:20px 20px 90px;
-  font-size:12px;
-  color:var(--ink-soft);
-}
-</style>
+    .tab.active {
+      opacity: 1;
+    }
+
+    .tab-ling {
+      background: var(--pink);
+    }
+
+    .tab-hum {
+      background: var(--purple);
+    }
+
+    .tab-nat {
+      background: var(--blue);
+    }
+
+    .tab-mat {
+      background: var(--green);
+    }
+
+    .tab-red {
+      background: #D9A83B;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 28px 0 40px;
+      text-align: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--white);
+      border: 1.5px dashed var(--ink);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      margin-bottom: 22px;
+      transform: rotate(-1.5deg);
+    }
+
+    .countdown-wrap {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto 26px;
+    }
+
+    .countdown-note {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--pink-deep);
+      transform: rotate(-3deg);
+      margin-bottom: -6px;
+    }
+
+    .countdown-circle {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown-circle svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .countdown-days {
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .countdown-days span {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .countdown-sub {
+      display: flex;
+      gap: 14px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    .countdown-sub b {
+      display: block;
+      font-size: 17px;
+      color: var(--ink);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      margin-bottom: 14px;
+      padding: 0 6px;
+    }
+
+    .hero h1 mark {
+      background: var(--yellow);
+      background-image: linear-gradient(120deg, var(--yellow) 0%, var(--yellow) 100%);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--ink);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--ink-soft);
+      max-width: 380px;
+      margin: 0 auto 26px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--pink);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 28px;
+      border-radius: 14px;
+      box-shadow: 0 10px 0 var(--pink-deep);
+      transition: transform .12s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary:active {
+      transform: translateY(6px);
+      box-shadow: 0 4px 0 var(--pink-deep);
+    }
+
+    .hero-note {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-top: 12px;
+    }
+
+    /* ---------- SECTION GENERIC ---------- */
+    section {
+      padding: 44px 0;
+    }
+
+    .section-eyebrow {
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--pink-deep);
+      transform: rotate(-2deg);
+      display: inline-block;
+      margin-bottom: 2px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--ink-soft);
+      margin-bottom: 28px;
+      max-width: 420px;
+    }
+
+    .cut-line {
+      border: none;
+      border-top: 2px dashed var(--line);
+      margin: 0;
+      position: relative;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* ---------- QUIZ ---------- */
+    .quiz-card {
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 26px 22px 24px;
+      position: relative;
+      transform: rotate(-0.6deg);
+    }
+
+    .quiz-pin {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .quiz-progress {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .quiz-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--line);
+    }
+
+    .quiz-dot.done {
+      background: var(--green);
+    }
+
+    .quiz-dot.current {
+      background: var(--pink);
+    }
+
+    .quiz-q {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quiz-opt {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      color: var(--ink);
+      background: var(--paper);
+      transition: border-color .15s ease, background .15s ease;
+    }
+
+    .quiz-opt:active {
+      background: var(--yellow);
+      border-color: var(--yellow);
+    }
+
+    .quiz-step {
+      display: none;
+    }
+
+    .quiz-step.active {
+      display: block;
+      animation: slidein .35s ease;
+    }
+
+    @keyframes slidein {
+      from {
+        opacity: 0;
+        transform: translateX(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .quiz-result {
+      display: none;
+      text-align: center;
+    }
+
+    .quiz-result.active {
+      display: block;
+      animation: slidein .4s ease;
+    }
+
+    .quiz-result-badge {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--green);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .quiz-result p {
+      font-size: 15.5px;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+    }
+
+    /* ---------- PREVIEW CAROUSEL ---------- */
+    .carousel {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 4px 20px 14px;
+      margin: 0 -20px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .preview-card {
+      scroll-snap-align: center;
+      flex: 0 0 240px;
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      border-top: 6px solid var(--pink);
+    }
+
+    .preview-card.c2 {
+      border-top-color: var(--purple);
+    }
+
+    .preview-card.c3 {
+      border-top-color: var(--blue);
+    }
+
+    .preview-card.c4 {
+      border-top-color: var(--green);
+    }
+
+    .preview-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 10px;
+    }
+
+    .mini-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 7px;
+    }
+
+    .mini-box {
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      flex: 0 0 auto;
+    }
+
+    .mini-line {
+      height: 8px;
+      background: var(--paper-deep);
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    .mini-bar {
+      height: 6px;
+      border-radius: 4px;
+      background: var(--line);
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .mini-bar i {
+      display: block;
+      height: 100%;
+      background: var(--pink);
+      width: 64%;
+    }
+
+    /* ---------- INCLUDED LIST ---------- */
+    .incl-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .incl-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .incl-check {
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      color: var(--green);
+    }
+
+    .incl-item b {
+      font-size: 15px;
+      display: block;
+    }
+
+    .incl-item span {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- TESTIMONIALS ---------- */
+    .notes-wrap {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 6px 20px 16px;
+      margin: 0 -20px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .notes-wrap::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    .note {
+      scroll-snap-align: center;
+      flex: 0 0 250px;
+      background: var(--yellow);
+      border-radius: 4px;
+      padding: 20px 18px 24px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+      font-family: 'Caveat', cursive;
+      font-size: 19px;
+      line-height: 1.35;
+      color: #4a3c00;
+      position: relative;
+    }
+
+    .note.n2 {
+      background: var(--green-soft);
+      color: #1c4a2e;
+    }
+
+    .note.n3 {
+      background: #FBD7E6;
+      color: #5c1734;
+    }
+
+    .note-tape {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-3deg);
+      width: 60px;
+      height: 22px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .note-name {
+      display: block;
+      margin-top: 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      opacity: 0.75;
+    }
+
+    .note-flag {
+      font-size: 10.5px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      opacity: .55;
+    }
+
+    /* ---------- OFFER ---------- */
+    .offer-card {
+      background: var(--ink);
+      border-radius: 20px;
+      padding: 30px 24px 28px;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offer-ribbon {
+      position: absolute;
+      top: 16px;
+      right: -34px;
+      background: var(--pink);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 40px;
+      transform: rotate(35deg);
+    }
+
+    .offer-old {
+      font-size: 16px;
+      color: #8891B0;
+      text-decoration: line-through;
+      margin-bottom: 2px;
+    }
+
+    .offer-price {
+      font-size: 52px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      margin-bottom: 4px;
+    }
+
+    .offer-price sup {
+      font-size: 22px;
+      top: -22px;
+      position: relative;
+    }
+
+    .offer-cycle {
+      font-size: 13px;
+      color: #AEB6D6;
+      margin-bottom: 22px;
+    }
+
+    .offer-list {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    .offer-list div {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .offer-guarantee {
+      font-size: 12.5px;
+      color: #AEB6D6;
+      margin-top: 14px;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq-item {
+      border-bottom: 2px dashed var(--line);
+      padding: 16px 0;
+    }
+
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .faq-icon {
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: transform .2s ease;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .25s ease;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding-top: 10px;
+    }
+
+    /* ---------- FINAL CTA ---------- */
+    .final-cta {
+      text-align: center;
+      padding: 44px 0 100px;
+    }
+
+    .final-cta h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    /* ---------- STICKY BOTTOM BAR ---------- */
+    .sticky-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--white);
+      border-top: 1.5px solid var(--line);
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transform: translateY(120%);
+      transition: transform .3s ease;
+      z-index: 40;
+      box-shadow: 0 -6px 20px rgba(27, 35, 64, 0.12);
+    }
+
+    .sticky-bar.show {
+      transform: translateY(0);
+    }
+
+    .sticky-price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .sticky-price span {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .sticky-bar .btn-primary {
+      padding: 12px 20px;
+      font-size: 14.5px;
+      box-shadow: 0 6px 0 var(--pink-deep);
+      white-space: nowrap;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 20px 90px;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="tabstrip">
-  <div class="tab tab-ling active">LING</div>
-  <div class="tab tab-hum">HUM</div>
-  <div class="tab tab-nat">NAT</div>
-  <div class="tab tab-mat">MAT</div>
-  <div class="tab tab-red">RED</div>
-</div>
-
-<!-- HERO -->
-<header class="hero wrap">
-  <div class="hero-tag">📓 planner digital · reta final 2026</div>
-
-  <div class="countdown-wrap">
-    <span class="countdown-note">cola isso na sua cabeça 👇</span>
-    <div class="countdown-circle">
-      <svg viewBox="0 0 220 220"><ellipse cx="110" cy="110" rx="95" ry="88" fill="none" stroke="#FF4F81" stroke-width="7" stroke-linecap="round" transform="rotate(-4 110 110)"/></svg>
-      <div class="countdown-days"><span id="cd-days">--</span><span>dias até o 1º dia de prova</span></div>
-    </div>
-    <div class="countdown-sub">
-      <div><b id="cd-hours">--</b>horas</div>
-      <div><b id="cd-min">--</b>min</div>
-      <div><b id="cd-sec">--</b>seg</div>
-    </div>
+  <div class="tabstrip">
+    <div class="tab tab-ling active">LING</div>
+    <div class="tab tab-hum">HUM</div>
+    <div class="tab tab-nat">NAT</div>
+    <div class="tab tab-mat">MAT</div>
+    <div class="tab tab-red">RED</div>
   </div>
 
-  <h1>Faltam dias. <mark>Você já tem um plano</mark> pra chegar até lá?</h1>
-  <p class="hero-sub">O planner que organiza sua reta final pro ENEM — sem enrolação, sem fórmula mágica. Só constância, semana a semana.</p>
+  <!-- HERO -->
+  <header class="hero wrap">
+    <div class="hero-tag">📓 planner digital · reta final 2026</div>
 
-  <a href="#oferta" class="btn-primary">Quero organizar minha reta final →</a>
-  <p class="hero-note">R$ 17,90 · acesso imediato em PDF</p>
-</header>
-
-<hr class="cut-line wrap">
-
-<!-- QUIZ -->
-<section id="quiz">
-  <div class="wrap">
-    <span class="section-eyebrow">antes de tudo</span>
-    <h2 class="section-title">3 toques rápidos sobre você</h2>
-    <p class="section-sub">Sem enrolação. É só pra gente entender onde você está agora.</p>
-
-    <div class="quiz-card">
-      <div class="quiz-pin"></div>
-      <div class="quiz-progress">
-        <div class="quiz-dot" data-dot="0"></div>
-        <div class="quiz-dot" data-dot="1"></div>
-        <div class="quiz-dot" data-dot="2"></div>
+    <div class="countdown-wrap">
+      <span class="countdown-note">cola isso na sua cabeça 👇</span>
+      <div class="countdown-circle">
+        <svg viewBox="0 0 220 220">
+          <ellipse cx="110" cy="110" rx="95" ry="88" fill="none" stroke="#FF4F81" stroke-width="7"
+            stroke-linecap="round" transform="rotate(-4 110 110)" />
+        </svg>
+        <div class="countdown-days"><span id="cd-days">--</span><span>dias até o 1º dia de prova</span></div>
       </div>
+      <div class="countdown-sub">
+        <div><b id="cd-hours">--</b>horas</div>
+        <div><b id="cd-min">--</b>min</div>
+        <div><b id="cd-sec">--</b>seg</div>
+      </div>
+    </div>
 
-      <div class="quiz-step active" data-step="0">
-        <p class="quiz-q">Como está sua organização de estudos hoje?</p>
-        <div class="quiz-options">
-          <button class="quiz-opt" data-next>Não tenho nenhuma</button>
-          <button class="quiz-opt" data-next>Tenho, mas não sigo</button>
-          <button class="quiz-opt" data-next>Sigo, mas travo direto</button>
+    <h1>Faltam dias. <mark>Você já tem um plano</mark> pra chegar até lá?</h1>
+    <p class="hero-sub">O planner que organiza sua reta final pro ENEM — sem enrolação, sem fórmula mágica. Só
+      constância, semana a semana.</p>
+
+    <a href="#oferta" class="btn-primary">Quero organizar minha reta final →</a>
+    <p class="hero-note">R$ 17,90 · acesso imediato em PDF</p>
+  </header>
+
+  <hr class="cut-line wrap">
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="wrap">
+      <span class="section-eyebrow">antes de tudo</span>
+      <h2 class="section-title">3 toques rápidos sobre você</h2>
+      <p class="section-sub">Sem enrolação. É só pra gente entender onde você está agora.</p>
+
+      <div class="quiz-card">
+        <div class="quiz-pin"></div>
+        <div class="quiz-progress">
+          <div class="quiz-dot" data-dot="0"></div>
+          <div class="quiz-dot" data-dot="1"></div>
+          <div class="quiz-dot" data-dot="2"></div>
+        </div>
+
+        <div class="quiz-step active" data-step="0">
+          <p class="quiz-q">Como está sua organização de estudos hoje?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-next>Não tenho nenhuma</button>
+            <button class="quiz-opt" data-next>Tenho, mas não sigo</button>
+            <button class="quiz-opt" data-next>Sigo, mas travo direto</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="1">
+          <p class="quiz-q">Você já fez algum simulado completo esse ano?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-next>Já fiz</button>
+            <button class="quiz-opt" data-next>Ainda não</button>
+            <button class="quiz-opt" data-next>Nem sei por onde começar</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="2">
+          <p class="quiz-q">O que mais pesa na sua cabeça agora?</p>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-result="conteudo">Não saber o que estudar</button>
+            <button class="quiz-opt" data-result="rotina">Não conseguir manter rotina</button>
+            <button class="quiz-opt" data-result="ansiedade">Medo de travar na hora da prova</button>
+          </div>
+        </div>
+
+        <div class="quiz-result" data-result-panel="conteudo">
+          <p class="quiz-result-badge">isso é mais comum do que parece</p>
+          <p>Não saber por onde começar trava mais gente do que falta de tempo. O planner já vem com o mapa mês a mês
+            pronto — você só segue.</p>
+          <a href="#oferta" class="btn-primary">Ver o planner →</a>
+        </div>
+        <div class="quiz-result" data-result-panel="rotina">
+          <p class="quiz-result-badge">rotina se constrói, não se encontra</p>
+          <p>Ninguém nasce disciplinado. O planner quebra a reta final em 19 semanas pequenas — muito mais fácil de
+            seguir do que "estudar todo dia".</p>
+          <a href="#oferta" class="btn-primary">Ver o planner →</a>
+        </div>
+        <div class="quiz-result" data-result-panel="ansiedade">
+          <p class="quiz-result-badge">ansiedade também tem plano</p>
+          <p>O planner tem uma página só pra isso: checklist de autocuidado e da semana da prova, pra você chegar em
+            novembro com a cabeça no lugar.</p>
+          <a href="#oferta" class="btn-primary">Ver o planner →</a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="quiz-step" data-step="1">
-        <p class="quiz-q">Você já fez algum simulado completo esse ano?</p>
-        <div class="quiz-options">
-          <button class="quiz-opt" data-next>Já fiz</button>
-          <button class="quiz-opt" data-next>Ainda não</button>
-          <button class="quiz-opt" data-next>Nem sei por onde começar</button>
+  <hr class="cut-line wrap">
+
+  <!-- PREVIEW -->
+  <section id="preview">
+    <div class="wrap">
+      <span class="section-eyebrow">dá uma espiada</span>
+      <h2 class="section-title">Prévia de páginas reais do planner</h2>
+      <p class="section-sub">Arraste pro lado — é exatamente isso que você recebe em PDF.</p>
+    </div>
+    <div class="carousel">
+      <div class="preview-card">
+        <div class="preview-label">Diagnóstico</div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:70%"></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:55%"></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:80%"></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:40%"></div>
         </div>
       </div>
-
-      <div class="quiz-step" data-step="2">
-        <p class="quiz-q">O que mais pesa na sua cabeça agora?</p>
-        <div class="quiz-options">
-          <button class="quiz-opt" data-result="conteudo">Não saber o que estudar</button>
-          <button class="quiz-opt" data-result="rotina">Não conseguir manter rotina</button>
-          <button class="quiz-opt" data-result="ansiedade">Medo de travar na hora da prova</button>
+      <div class="preview-card c2">
+        <div class="preview-label">Semana 07 de 19</div>
+        <div class="mini-bar"><i></i></div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:60%"></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:85%"></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:50%"></div>
         </div>
       </div>
-
-      <div class="quiz-result" data-result-panel="conteudo">
-        <p class="quiz-result-badge">isso é mais comum do que parece</p>
-        <p>Não saber por onde começar trava mais gente do que falta de tempo. O planner já vem com o mapa mês a mês pronto — você só segue.</p>
-        <a href="#oferta" class="btn-primary">Ver o planner →</a>
+      <div class="preview-card c3">
+        <div class="preview-label">Tracker de redação</div>
+        <div class="mini-row">
+          <div class="mini-line" style="width:30%"></div>
+          <div class="mini-line" style="width:50%"></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-line" style="width:30%"></div>
+          <div class="mini-line" style="width:65%"></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-line" style="width:30%"></div>
+          <div class="mini-line" style="width:40%"></div>
+        </div>
       </div>
-      <div class="quiz-result" data-result-panel="rotina">
-        <p class="quiz-result-badge">rotina se constrói, não se encontra</p>
-        <p>Ninguém nasce disciplinado. O planner quebra a reta final em 19 semanas pequenas — muito mais fácil de seguir do que "estudar todo dia".</p>
-        <a href="#oferta" class="btn-primary">Ver o planner →</a>
-      </div>
-      <div class="quiz-result" data-result-panel="ansiedade">
-        <p class="quiz-result-badge">ansiedade também tem plano</p>
-        <p>O planner tem uma página só pra isso: checklist de autocuidado e da semana da prova, pra você chegar em novembro com a cabeça no lugar.</p>
-        <a href="#oferta" class="btn-primary">Ver o planner →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="cut-line wrap">
-
-<!-- PREVIEW -->
-<section id="preview">
-  <div class="wrap">
-    <span class="section-eyebrow">dá uma espiada</span>
-    <h2 class="section-title">Prévia de páginas reais do planner</h2>
-    <p class="section-sub">Arraste pro lado — é exatamente isso que você recebe em PDF.</p>
-  </div>
-  <div class="carousel">
-    <div class="preview-card">
-      <div class="preview-label">Diagnóstico</div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:70%"></div></div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:55%"></div></div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:80%"></div></div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:40%"></div></div>
-    </div>
-    <div class="preview-card c2">
-      <div class="preview-label">Semana 07 de 19</div>
-      <div class="mini-bar"><i></i></div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:60%"></div></div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:85%"></div></div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:50%"></div></div>
-    </div>
-    <div class="preview-card c3">
-      <div class="preview-label">Tracker de redação</div>
-      <div class="mini-row"><div class="mini-line" style="width:30%"></div><div class="mini-line" style="width:50%"></div></div>
-      <div class="mini-row"><div class="mini-line" style="width:30%"></div><div class="mini-line" style="width:65%"></div></div>
-      <div class="mini-row"><div class="mini-line" style="width:30%"></div><div class="mini-line" style="width:40%"></div></div>
-    </div>
-    <div class="preview-card c4">
-      <div class="preview-label">Checklist da prova</div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:75%"></div></div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:60%"></div></div>
-      <div class="mini-row"><div class="mini-box"></div><div class="mini-line" style="width:68%"></div></div>
-    </div>
-  </div>
-</section>
-
-<hr class="cut-line wrap">
-
-<!-- INCLUDED -->
-<section id="incluso">
-  <div class="wrap">
-    <span class="section-eyebrow">o que vem dentro</span>
-    <h2 class="section-title">Tudo pra não perder o fio da meada</h2>
-    <p class="section-sub">Um planner, sete blocos, zero enrolação.</p>
-    <div class="incl-list">
-      <div class="incl-item">
-        <svg class="incl-check" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>Diagnóstico inicial</b><span>pra saber onde focar seu tempo primeiro</span></div>
-      </div>
-      <div class="incl-item">
-        <svg class="incl-check" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>Mapa da reta final</b><span>visão geral de julho a novembro</span></div>
-      </div>
-      <div class="incl-item">
-        <svg class="incl-check" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>Tracker de redação</b><span>acompanhe sua evolução texto a texto</span></div>
-      </div>
-      <div class="incl-item">
-        <svg class="incl-check" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>Calendário de revisão</b><span>dividido pelos 2 dias de prova</span></div>
-      </div>
-      <div class="incl-item">
-        <svg class="incl-check" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>19 páginas semanais</b><span>com barra de progresso até a prova</span></div>
-      </div>
-      <div class="incl-item">
-        <svg class="incl-check" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>Checklist da semana da prova</b><span>documento, caneta, trajeto — tudo previsto</span></div>
-      </div>
-      <div class="incl-item">
-        <svg class="incl-check" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>Checklist de autocuidado</b><span>pra chegar em novembro com a cabeça no lugar</span></div>
+      <div class="preview-card c4">
+        <div class="preview-label">Checklist da prova</div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:75%"></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:60%"></div>
+        </div>
+        <div class="mini-row">
+          <div class="mini-box"></div>
+          <div class="mini-line" style="width:68%"></div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<hr class="cut-line wrap">
+  <hr class="cut-line wrap">
 
-<!-- TESTIMONIALS -->
-<section id="depoimentos">
-  <div class="wrap">
-    <span class="section-eyebrow">quem já usou</span>
-    <h2 class="section-title">Não é só comigo</h2>
-  </div>
-  <!--
+  <!-- INCLUDED -->
+  <section id="incluso">
+    <div class="wrap">
+      <span class="section-eyebrow">o que vem dentro</span>
+      <h2 class="section-title">Tudo pra não perder o fio da meada</h2>
+      <p class="section-sub">Um planner, sete blocos, zero enrolação.</p>
+      <div class="incl-list">
+        <div class="incl-item">
+          <svg class="incl-check" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <div><b>Diagnóstico inicial</b><span>pra saber onde focar seu tempo primeiro</span></div>
+        </div>
+        <div class="incl-item">
+          <svg class="incl-check" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <div><b>Mapa da reta final</b><span>visão geral de julho a novembro</span></div>
+        </div>
+        <div class="incl-item">
+          <svg class="incl-check" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <div><b>Tracker de redação</b><span>acompanhe sua evolução texto a texto</span></div>
+        </div>
+        <div class="incl-item">
+          <svg class="incl-check" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <div><b>Calendário de revisão</b><span>dividido pelos 2 dias de prova</span></div>
+        </div>
+        <div class="incl-item">
+          <svg class="incl-check" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <div><b>19 páginas semanais</b><span>com barra de progresso até a prova</span></div>
+        </div>
+        <div class="incl-item">
+          <svg class="incl-check" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <div><b>Checklist da semana da prova</b><span>documento, caneta, trajeto — tudo previsto</span></div>
+        </div>
+        <div class="incl-item">
+          <svg class="incl-check" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          <div><b>Checklist de autocuidado</b><span>pra chegar em novembro com a cabeça no lugar</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="cut-line wrap">
+
+  <!-- TESTIMONIALS -->
+  <section id="depoimentos">
+    <div class="wrap">
+      <span class="section-eyebrow">quem já usou</span>
+      <h2 class="section-title">Não é só comigo</h2>
+    </div>
+    <!--
     ATENÇÃO: os 3 depoimentos abaixo são fictícios (produto ainda não lançado).
     Substitua pelos relatos reais dos primeiros compradores antes de publicar.
     Publicar depoimento fictício como se fosse de cliente real pode configurar
     propaganda enganosa.
   -->
-  <div class="notes-wrap">
-    <div class="note">
-      <div class="note-tape"></div>
-      <p>"Eu não sabia nem por onde começar. Com o planner eu vi minha semana toda de uma vez e parei de surtar."</p>
-      <span class="note-name">— Beatriz Almeida, 3º ano</span>
-    </div>
-    <div class="note n2">
-      <div class="note-tape"></div>
-      <p>"A parte de redação sozinha já valeu. Consegui ver minha evolução semana a semana."</p>
-      <span class="note-name">— Lucas Ferreira, cursinho</span>
-    </div>
-    <div class="note n3">
-      <div class="note-tape"></div>
-      <p>"Travava toda vez que pensava na prova. O checklist de autocuidado me ajudou mais do que eu esperava."</p>
-      <span class="note-name">— Ana Clara Souza, 3º ano</span>
-    </div>
-  </div>
-</section>
-
-<hr class="cut-line wrap">
-
-<!-- OFFER -->
-<section id="oferta">
-  <div class="wrap">
-    <span class="section-eyebrow">bora pra reta final</span>
-    <h2 class="section-title">Seu plano até o dia 8 de novembro</h2>
-    <div class="offer-card">
-      <div class="offer-ribbon">RETA FINAL</div>
-      <p class="offer-old">de R$ 47</p>
-      <p class="offer-price"><sup>R$</sup>17,90</p>
-      <p class="offer-cycle">pagamento único · acesso imediato</p>
-      <div class="offer-list">
-        <div>✅ Planner completo em PDF, pronto pra imprimir</div>
-        <div>✅ 19 semanas + diagnóstico + trackers + checklists</div>
-        <div>✅ Garantia de 7 dias — não gostou, devolvemos</div>
+    <div class="notes-wrap">
+      <div class="note">
+        <div class="note-tape"></div>
+        <p>"Eu não sabia nem por onde começar. Com o planner eu vi minha semana toda de uma vez e parei de surtar."</p>
+        <span class="note-name">— Beatriz Almeida, 3º ano</span>
       </div>
-      <a href="#" class="btn-primary" style="width:100%;">Quero meu planner agora →</a>
-      <p class="offer-guarantee">Entrega digital automática após confirmação do pagamento.</p>
+      <div class="note n2">
+        <div class="note-tape"></div>
+        <p>"A parte de redação sozinha já valeu. Consegui ver minha evolução semana a semana."</p>
+        <span class="note-name">— Lucas Ferreira, cursinho</span>
+      </div>
+      <div class="note n3">
+        <div class="note-tape"></div>
+        <p>"Travava toda vez que pensava na prova. O checklist de autocuidado me ajudou mais do que eu esperava."</p>
+        <span class="note-name">— Ana Clara Souza, 3º ano</span>
+      </div>
     </div>
+  </section>
+
+  <hr class="cut-line wrap">
+
+  <!-- OFFER -->
+  <section id="oferta">
+    <div class="wrap">
+      <span class="section-eyebrow">bora pra reta final</span>
+      <h2 class="section-title">Seu plano até o dia 8 de novembro</h2>
+      <div class="offer-card">
+        <div class="offer-ribbon">RETA FINAL</div>
+        <p class="offer-old">de R$ 47</p>
+        <p class="offer-price"><sup>R$</sup>17,90</p>
+        <p class="offer-cycle">pagamento único · acesso imediato</p>
+        <div class="offer-list">
+          <div>✅ Planner completo em PDF, pronto pra imprimir</div>
+          <div>✅ 19 semanas + diagnóstico + trackers + checklists</div>
+          <div>✅ Garantia de 7 dias — não gostou, devolvemos</div>
+        </div>
+        <a href="https://pay.cakto.com.br/36x55d3_971687" class="btn-primary" style="width:100%;">Quero meu planner
+          agora →</a>
+        <p class="offer-guarantee">Entrega digital automática após confirmação do pagamento.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="cut-line wrap">
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <span class="section-eyebrow">dúvidas rápidas</span>
+      <h2 class="section-title">Perguntas frequentes</h2>
+
+      <div class="faq-item">
+        <div class="faq-q"><span>Como recebo o planner?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Em PDF, por e-mail, logo após a confirmação do pagamento. Pode imprimir ou usar direto do
+          celular/tablet.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Funciona se eu estou começando do zero?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Sim — o diagnóstico inicial existe exatamente pra isso: te ajudar a organizar por onde
+          começar, mesmo sem nenhuma base de estudo ainda.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>E se eu atrasar ou pular uma semana?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Sem problema. O planner é feito pra retomar de onde parou — o objetivo é constância, não
+          perfeição.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Quais formas de pagamento?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Pix, cartão de crédito e boleto, direto no checkout.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Tem garantia?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Sim, 7 dias. Se não fizer sentido pra você, devolvemos o valor sem burocracia.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="wrap">
+      <span id="cd-days-final" class="hand" style="font-size:22px;color:var(--pink-deep);">carregando contagem…</span>
+      <h2>Faltam semanas, não anos.</h2>
+      <p class="section-sub" style="margin:0 auto 22px;">Constância vale mais que perfeição. Comece essa semana.</p>
+      <a href="#oferta" class="btn-primary">Quero organizar minha reta final →</a>
+    </div>
+  </section>
+
+  <footer>
+    Reta Final ENEM — planner digital. Produto de uso pessoal, entrega 100% digital.
+  </footer>
+
+  <div class="sticky-bar" id="stickyBar">
+    <div class="sticky-price">R$ 17,90<span>acesso imediato</span></div>
+    <a href="#oferta" class="btn-primary">Quero o planner</a>
   </div>
-</section>
 
-<hr class="cut-line wrap">
+  <script>
+    // ---------- COUNTDOWN ----------
+    (function () {
+      var target = new Date("2026-11-08T16:30:00Z").getTime(); // 13:30 horário de Brasília
+      function tick() {
+        var now = new Date().getTime();
+        var diff = Math.max(0, target - now);
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var secs = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('cd-days').textContent = days;
+        document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('cd-min').textContent = String(mins).padStart(2, '0');
+        document.getElementById('cd-sec').textContent = String(secs).padStart(2, '0');
+        var finalEl = document.getElementById('cd-days-final');
+        if (finalEl) { finalEl.textContent = days + ' dias até o 1º dia de prova'; }
+        var h1 = document.querySelector('.hero h1');
+        if (h1 && !h1.dataset.filled) {
+          h1.innerHTML = 'Faltam ' + days + ' dias. <mark>Você já tem um plano</mark> pra chegar até lá?';
+          h1.dataset.filled = "1";
+        }
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
 
-<!-- FAQ -->
-<section id="faq">
-  <div class="wrap">
-    <span class="section-eyebrow">dúvidas rápidas</span>
-    <h2 class="section-title">Perguntas frequentes</h2>
+    // ---------- QUIZ ----------
+    (function () {
+      var steps = document.querySelectorAll('.quiz-step');
+      var dots = document.querySelectorAll('.quiz-dot');
+      var resultPanels = document.querySelectorAll('.quiz-result');
+      var current = 0;
 
-    <div class="faq-item">
-      <div class="faq-q"><span>Como recebo o planner?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">Em PDF, por e-mail, logo após a confirmação do pagamento. Pode imprimir ou usar direto do celular/tablet.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q"><span>Funciona se eu estou começando do zero?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">Sim — o diagnóstico inicial existe exatamente pra isso: te ajudar a organizar por onde começar, mesmo sem nenhuma base de estudo ainda.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q"><span>E se eu atrasar ou pular uma semana?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">Sem problema. O planner é feito pra retomar de onde parou — o objetivo é constância, não perfeição.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q"><span>Quais formas de pagamento?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">Pix, cartão de crédito e boleto, direto no checkout.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q"><span>Tem garantia?</span><span class="faq-icon">+</span></div>
-      <div class="faq-a">Sim, 7 dias. Se não fizer sentido pra você, devolvemos o valor sem burocracia.</div>
-    </div>
-  </div>
-</section>
+      function updateDots() {
+        dots.forEach(function (d, i) {
+          d.classList.remove('done', 'current');
+          if (i < current) d.classList.add('done');
+          if (i === current) d.classList.add('current');
+        });
+      }
+      updateDots();
 
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <div class="wrap">
-    <span id="cd-days-final" class="hand" style="font-size:22px;color:var(--pink-deep);">carregando contagem…</span>
-    <h2>Faltam semanas, não anos.</h2>
-    <p class="section-sub" style="margin:0 auto 22px;">Constância vale mais que perfeição. Comece essa semana.</p>
-    <a href="#oferta" class="btn-primary">Quero organizar minha reta final →</a>
-  </div>
-</section>
-
-<footer>
-  Reta Final ENEM — planner digital. Produto de uso pessoal, entrega 100% digital.
-</footer>
-
-<div class="sticky-bar" id="stickyBar">
-  <div class="sticky-price">R$ 17,90<span>acesso imediato</span></div>
-  <a href="#oferta" class="btn-primary">Quero o planner</a>
-</div>
-
-<script>
-// ---------- COUNTDOWN ----------
-(function(){
-  var target = new Date("2026-11-08T16:30:00Z").getTime(); // 13:30 horário de Brasília
-  function tick(){
-    var now = new Date().getTime();
-    var diff = Math.max(0, target - now);
-    var days = Math.floor(diff / (1000*60*60*24));
-    var hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    var mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-    var secs = Math.floor((diff % (1000*60)) / 1000);
-    document.getElementById('cd-days').textContent = days;
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
-    document.getElementById('cd-min').textContent = String(mins).padStart(2,'0');
-    document.getElementById('cd-sec').textContent = String(secs).padStart(2,'0');
-    var finalEl = document.getElementById('cd-days-final');
-    if(finalEl){ finalEl.textContent = days + ' dias até o 1º dia de prova'; }
-    var h1 = document.querySelector('.hero h1');
-    if(h1 && !h1.dataset.filled){
-      h1.innerHTML = 'Faltam ' + days + ' dias. <mark>Você já tem um plano</mark> pra chegar até lá?';
-      h1.dataset.filled = "1";
-    }
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
-
-// ---------- QUIZ ----------
-(function(){
-  var steps = document.querySelectorAll('.quiz-step');
-  var dots = document.querySelectorAll('.quiz-dot');
-  var resultPanels = document.querySelectorAll('.quiz-result');
-  var current = 0;
-
-  function updateDots(){
-    dots.forEach(function(d, i){
-      d.classList.remove('done','current');
-      if(i < current) d.classList.add('done');
-      if(i === current) d.classList.add('current');
-    });
-  }
-  updateDots();
-
-  steps.forEach(function(step, idx){
-    step.querySelectorAll('[data-next]').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        steps[idx].classList.remove('active');
-        current = idx + 1;
-        steps[current].classList.add('active');
-        updateDots();
-      });
-    });
-    step.querySelectorAll('[data-result]').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var key = btn.getAttribute('data-result');
-        steps[idx].classList.remove('active');
-        current = steps.length;
-        updateDots();
-        resultPanels.forEach(function(p){
-          p.classList.toggle('active', p.getAttribute('data-result-panel') === key);
+      steps.forEach(function (step, idx) {
+        step.querySelectorAll('[data-next]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            steps[idx].classList.remove('active');
+            current = idx + 1;
+            steps[current].classList.add('active');
+            updateDots();
+          });
+        });
+        step.querySelectorAll('[data-result]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var key = btn.getAttribute('data-result');
+            steps[idx].classList.remove('active');
+            current = steps.length;
+            updateDots();
+            resultPanels.forEach(function (p) {
+              p.classList.toggle('active', p.getAttribute('data-result-panel') === key);
+            });
+          });
         });
       });
-    });
-  });
-})();
+    })();
 
-// ---------- FAQ ACCORDION ----------
-document.querySelectorAll('.faq-item').forEach(function(item){
-  item.querySelector('.faq-q').addEventListener('click', function(){
-    var isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
-    if(!isOpen) item.classList.add('open');
-  });
-});
-
-// ---------- STICKY CTA BAR ----------
-(function(){
-  var bar = document.getElementById('stickyBar');
-  var hero = document.querySelector('.hero');
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(!entry.isIntersecting){ bar.classList.add('show'); }
-      else { bar.classList.remove('show'); }
+    // ---------- FAQ ACCORDION ----------
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      item.querySelector('.faq-q').addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
     });
-  }, {threshold:0});
-  io.observe(hero);
-})();
 
-// ---------- SCROLL REVEAL ----------
-(function(){
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var els = document.querySelectorAll('section');
-  if(reduceMotion){
-    els.forEach(function(el){ el.classList.add('in'); });
-    return;
-  }
-  els.forEach(function(el){ el.classList.add('reveal'); });
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){ entry.target.classList.add('in'); }
-    });
-  }, {threshold:0.12});
-  els.forEach(function(el){ io.observe(el); });
-  // safety net: never leave a section permanently invisible
-  setTimeout(function(){
-    els.forEach(function(el){ el.classList.add('in'); });
-  }, 4000);
-})();
-</script>
+    // ---------- STICKY CTA BAR ----------
+    (function () {
+      var bar = document.getElementById('stickyBar');
+      var hero = document.querySelector('.hero');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) { bar.classList.add('show'); }
+          else { bar.classList.remove('show'); }
+        });
+      }, { threshold: 0 });
+      io.observe(hero);
+    })();
+
+    // ---------- SCROLL REVEAL ----------
+    (function () {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var els = document.querySelectorAll('section');
+      if (reduceMotion) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      els.forEach(function (el) { el.classList.add('reveal'); });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in'); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+      // safety net: never leave a section permanently invisible
+      setTimeout(function () {
+        els.forEach(function (el) { el.classList.add('in'); });
+      }, 4000);
+    })();
+  </script>
 
 </body>
+
 </html>
